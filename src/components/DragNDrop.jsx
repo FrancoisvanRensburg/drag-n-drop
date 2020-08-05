@@ -57,7 +57,15 @@ const DragNDrop = ({ data }) => {
   return (
     <div className='drag-n-drop'>
       {list.map((grp, grpI) => (
-        <div key={grp.title} className='dnd-group'>
+        <div
+          key={grp.title}
+          className='dnd-group'
+          onDragEnter={
+            dragging && !grp.items.length
+              ? (e) => handleDragEnter(e, { grpI, itemI: 0 })
+              : null
+          }
+        >
           <div className='group-title'>{grp.title}</div>
           {grp.items.map((item, itemI) => (
             <div
